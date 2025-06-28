@@ -4,8 +4,8 @@ FROM node:18-alpine
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies including curl and libssl1.1 for Prisma compatibility
-RUN apk add --no-cache openssl curl libssl1.1
+# Install system dependencies including curl and libssl3 for Prisma compatibility
+RUN apk add --no-cache openssl curl libssl3
 
 # Set Prisma binary target for Alpine Linux compatibility
 ENV PRISMA_CLI_BINARY_TARGETS="linux-musl"
