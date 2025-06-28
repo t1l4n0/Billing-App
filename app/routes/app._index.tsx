@@ -48,13 +48,13 @@ export default function Index() {
   // Handle unauthenticated state
   if (!data.authenticated) {
     return (
-      <Page title="Shopify Billing App">
+      <Page title="Badgify - Product Badge System">
         <Layout>
           <Layout.Section>
             <Card>
               <BlockStack gap="400">
                 <Text variant="headingMd" as="h2">
-                  Welcome to Billing App
+                  Welcome to Badgify
                 </Text>
                 <Text variant="bodyMd">
                   This app needs to be accessed through the Shopify Admin to function properly.
@@ -75,11 +75,11 @@ export default function Index() {
   // Show subscription setup if no subscription exists
   if (!hasSubscription) {
     return (
-      <Page title="Welcome to Billing App">
+      <Page title="Welcome to Badgify">
         <Layout>
           <Layout.Section>
             <EmptyState
-              heading="Get started with your subscription"
+              heading="Get started with Badgify"
               action={{
                 content: "Start Free Trial",
                 url: "/app/billing",
@@ -87,7 +87,7 @@ export default function Index() {
               image="https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png"
             >
               <p>
-                Subscribe to unlock all features including Badgify badge generator. 
+                Create stunning product badges with our advanced design system. 
                 Start with a 3-day free trial, then just $9.99/month. Cancel anytime.
               </p>
             </EmptyState>
@@ -98,7 +98,7 @@ export default function Index() {
   }
 
   return (
-    <Page title="Billing App Dashboard">
+    <Page title="Badgify Dashboard">
       <Layout>
         <Layout.Section>
           {isInTrial && trialDaysRemaining > 0 && (
@@ -130,7 +130,7 @@ export default function Index() {
                 }}
               >
                 <p>
-                  Your subscription is active. You have full access to all app features including Badgify.
+                  Your subscription is active. You have full access to all Badgify features.
                 </p>
               </Banner>
             </div>
@@ -147,7 +147,7 @@ export default function Index() {
                 }}
               >
                 <p>
-                  Your free trial has ended. Please complete your subscription setup to continue using the app.
+                  Your free trial has ended. Please complete your subscription setup to continue using Badgify.
                 </p>
               </Banner>
             </div>
@@ -157,10 +157,10 @@ export default function Index() {
             <BlockStack gap="400">
               <div>
                 <Text variant="headingMd" as="h2">
-                  Welcome to {shop || "your shop"}
+                  Welcome to Badgify for {shop || "your shop"}
                 </Text>
                 <Text variant="bodyMd" tone="subdued">
-                  Your billing app dashboard with integrated Badgify
+                  Create stunning product badges with advanced design options
                 </Text>
               </div>
                 
@@ -174,7 +174,7 @@ export default function Index() {
                       <InlineStack gap="200" align="space-between">
                         <Text variant="bodyMd">Plan:</Text>
                         <Text variant="bodyMd" fontWeight="semibold">
-                          {subscription.planName || "Basic Plan"}
+                          {subscription.planName || "Badgify Pro"}
                         </Text>
                       </InlineStack>
                       
@@ -230,16 +230,20 @@ export default function Index() {
           <Card>
             <BlockStack gap="300">
               <Text variant="headingMd" as="h2">
-                Plan Features
+                Badgify Features
               </Text>
               <div>
                 <BlockStack gap="200">
-                  <Text variant="bodyMd">✓ Full app access</Text>
-                  <Text variant="bodyMd">✓ Badgify badge generator</Text>
-                  <Text variant="bodyMd">✓ 3-day free trial</Text>
-                  <Text variant="bodyMd">✓ Monthly billing ($9.99)</Text>
-                  <Text variant="bodyMd">✓ Cancel anytime</Text>
-                  <Text variant="bodyMd">✓ Email support</Text>
+                  <Text variant="bodyMd">✓ 8 Custom Badge Shapes</Text>
+                  <Text variant="bodyMd">✓ Advanced Design Options</Text>
+                  <Text variant="bodyMd">✓ Automatic Assignment Rules</Text>
+                  <Text variant="bodyMd">✓ Collection & Tag-based Assignment</Text>
+                  <Text variant="bodyMd">✓ Real-time Preview</Text>
+                  <Text variant="bodyMd">✓ Custom CSS & SVG Support</Text>
+                  <Text variant="bodyMd">✓ Badge Templates Library</Text>
+                  <Text variant="bodyMd">✓ Performance Analytics</Text>
+                  <Text variant="bodyMd">✓ Multi-tenancy Support</Text>
+                  <Text variant="bodyMd">✓ Theme Integration</Text>
                 </BlockStack>
               </div>
               
@@ -255,27 +259,47 @@ export default function Index() {
             <Card>
               <BlockStack gap="300">
                 <Text variant="headingMd" as="h2">
-                  🎯 Badgify Features
+                  🎯 Badge Shapes Available
                 </Text>
                 <div>
                   <BlockStack gap="200">
-                    <Text variant="bodyMd">✓ Custom badge generator</Text>
-                    <Text variant="bodyMd">✓ Multiple styles & colors</Text>
-                    <Text variant="bodyMd">✓ Logo integration</Text>
-                    <Text variant="bodyMd">✓ Ready-to-use presets</Text>
-                    <Text variant="bodyMd">✓ Badge history & reuse</Text>
-                    <Text variant="bodyMd">✓ Markdown export</Text>
+                    <Text variant="bodyMd">🔲 Rectangle - Classic badge style</Text>
+                    <Text variant="bodyMd">⭕ Circle - Round badges</Text>
+                    <Text variant="bodyMd">💊 Pill - Rounded corners</Text>
+                    <Text variant="bodyMd">🎀 Ribbon - Elegant ribbon style</Text>
+                    <Text variant="bodyMd">💥 Burst - Star-shaped badges</Text>
+                    <Text variant="bodyMd">🏷️ Tag - Price tag style</Text>
+                    <Text variant="bodyMd">🌙 Eclipse - Unique curved shape</Text>
+                    <Text variant="bodyMd">✨ Custom SVG - Your own designs</Text>
                   </BlockStack>
                 </div>
                 
                 <div style={{ marginTop: "1rem" }}>
                   <Button url="/app/badgify" fullWidth variant="primary">
-                    Launch Badgify
+                    Create Your First Badge
                   </Button>
                 </div>
               </BlockStack>
             </Card>
           )}
+
+          <Card>
+            <BlockStack gap="300">
+              <Text variant="headingMd" as="h2">
+                Assignment Options
+              </Text>
+              <div>
+                <BlockStack gap="200">
+                  <Text variant="bodyMd">📝 Manual Selection</Text>
+                  <Text variant="bodyMd">📁 Collection-based</Text>
+                  <Text variant="bodyMd">🏷️ Tag-based Assignment</Text>
+                  <Text variant="bodyMd">🏪 Vendor-based Rules</Text>
+                  <Text variant="bodyMd">📦 Product Type Rules</Text>
+                  <Text variant="bodyMd">🤖 Automatic Assignment</Text>
+                </BlockStack>
+              </div>
+            </BlockStack>
+          </Card>
         </Layout.Section>
       </Layout>
     </Page>
