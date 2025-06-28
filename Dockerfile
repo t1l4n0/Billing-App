@@ -4,8 +4,8 @@ FROM node:18-alpine
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies including curl
-RUN apk add --no-cache openssl curl
+# Install system dependencies including curl and libssl1.1 for Prisma compatibility
+RUN apk add --no-cache openssl curl libssl1.1
 
 # Copy package files first for better caching
 COPY package*.json ./
