@@ -4,8 +4,9 @@ FROM node:18-alpine
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies including curl, openssl1.1-compat, and libc6-compat for Prisma compatibility
-RUN apk add --no-cache openssl1.1-compat curl libc6-compat
+# Install system dependencies for Prisma compatibility
+# Updated for newer Alpine versions - removed openssl1.1-compat
+RUN apk add --no-cache openssl curl libc6-compat
 
 # Set Prisma binary target for Alpine Linux compatibility
 ENV PRISMA_CLI_BINARY_TARGETS="linux-musl"
