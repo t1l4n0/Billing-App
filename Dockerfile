@@ -7,10 +7,6 @@ WORKDIR /app
 # Install system dependencies for Prisma compatibility
 RUN apk add --no-cache openssl curl libc6-compat
 
-# Set Prisma binary targets for Alpine Linux compatibility
-ENV PRISMA_CLI_BINARY_TARGETS="native,linux-musl,linux-musl-openssl-3.0.x"
-ENV PRISMA_CLIENT_ENGINE_TYPE="binary"
-
 # Copy package files first for better caching
 COPY package*.json ./
 
