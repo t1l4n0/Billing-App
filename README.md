@@ -1,16 +1,30 @@
-# Shopify Billing App
+# Shopify Billing App with Badgify Integration
 
-Eine schlanke Shopify App basierend auf Remix und TypeScript mit Standard-Admin-Oberfläche und Implementierung der Billing API für ein vordefiniertes Abonnement.
+Eine umfassende Shopify App basierend auf Remix und TypeScript mit Standard-Admin-Oberfläche, Billing API Integration und integriertem Badgify Badge Generator.
 
-## Features
+## 🚀 Features
 
+### 💳 Billing & Subscription
 - 🔐 **Shopify OAuth Integration** - Sichere Authentifizierung mit Shopify
 - 💳 **Billing API Integration** - Vollständige Subscription-Verwaltung
 - 🆓 **3-Tage kostenlose Testphase** - Automatische Trial-Verwaltung
 - 💰 **$9.99/Monat Abonnement** - Einfaches monatliches Billing
+- 🔄 **Webhook Support** - Automatische Subscription-Verwaltung bei App-Deinstallation
+
+### 🎯 Badgify Badge Generator
+- ✨ **Custom Badge Generator** - Erstelle individuelle Badges
+- 🎨 **Multiple Styles** - Flat, Flat-Square, Plastic, For-the-Badge, Social
+- 🌈 **Farbauswahl** - Umfangreiche Farbpalette
+- 🏷️ **Logo Integration** - Unterstützung für Simple Icons
+- 📋 **Ready-to-use Presets** - Vorgefertigte Badge-Templates
+- 📚 **Badge History** - Speichere und verwende Badges wieder
+- 📝 **Export Funktionen** - Markdown und URL Export
+- 💾 **Download Support** - SVG Badge Download
+
+### 🎨 UI & UX
 - 🎨 **Polaris UI** - Native Shopify Admin-Oberfläche
 - 📱 **Responsive Design** - Funktioniert auf Desktop und Mobile
-- 🔄 **Webhook Support** - Automatische Subscription-Verwaltung bei App-Deinstallation
+- 🔒 **Subscription Guard** - Feature-Zugriff basierend auf Subscription-Status
 
 ## Tech Stack
 
@@ -20,24 +34,31 @@ Eine schlanke Shopify App basierend auf Remix und TypeScript mit Standard-Admin-
 - **UI**: Shopify Polaris
 - **Authentication**: Shopify App Bridge
 - **Billing**: Shopify Billing API
+- **Badge Generation**: shields.io Integration
 
 ## Projektstruktur
 
 ```
 shopify-billing-app/
 ├── app/
+│   ├── components/
+│   │   └── badgify/
+│   │       ├── BadgeGenerator.tsx      # Hauptkomponente für Badge-Erstellung
+│   │       ├── BadgePresets.tsx        # Vorgefertigte Badge-Templates
+│   │       └── BadgeHistory.tsx        # Badge-Verlauf und Wiederverwendung
 │   ├── routes/
-│   │   ├── app.tsx                    # App Layout
-│   │   ├── app._index.tsx             # Dashboard
-│   │   ├── app.billing.tsx            # Billing-Seite
-│   │   └── webhooks.app.uninstalled.tsx # Webhook-Handler
+│   │   ├── app.tsx                     # App Layout mit Navigation
+│   │   ├── app._index.tsx              # Dashboard mit Badgify Integration
+│   │   ├── app.billing.tsx             # Billing-Seite
+│   │   ├── app.badgify.tsx             # Badgify Hauptseite
+│   │   └── webhooks.*.tsx              # Webhook-Handler
 │   ├── utils/
-│   │   ├── billing.server.ts          # Billing-Logik
+│   │   ├── billing.server.ts           # Billing-Logik
 │   │   └── subscription-guard.server.ts # Subscription-Middleware
-│   ├── shopify.server.ts              # Shopify-Konfiguration
-│   └── root.tsx                       # App Root
+│   ├── shopify.server.ts               # Shopify-Konfiguration
+│   └── root.tsx                        # App Root
 ├── prisma/
-│   └── schema.prisma                  # Datenbankschema
+│   └── schema.prisma                   # Datenbankschema
 ├── package.json
 └── README.md
 ```
@@ -89,6 +110,30 @@ npm run db:push
 ```bash
 npm run dev
 ```
+
+## 🎯 Badgify Funktionen
+
+### Badge Generator
+- **Custom Text**: Beliebiger Text für Badges
+- **Labels**: Optionale Labels für strukturierte Badges
+- **Styles**: 5 verschiedene Badge-Stile
+- **Colors**: Umfangreiche Farbauswahl
+- **Logos**: Integration von Simple Icons
+- **Live Preview**: Sofortige Vorschau der generierten Badges
+
+### Badge Presets
+Vorgefertigte Badges für häufige Anwendungsfälle:
+- **Status Badges**: Build Status, Tests, etc.
+- **Technology Badges**: React, TypeScript, Node.js, Shopify
+- **Version Badges**: Versionsnummern und Releases
+- **License Badges**: MIT, Apache 2.0, etc.
+- **Social Badges**: GitHub Stars, Forks, etc.
+
+### Badge History
+- **Automatisches Speichern**: Generierte Badges werden automatisch gespeichert
+- **Wiederverwendung**: Einfache Wiederverwendung gespeicherter Badges
+- **Export**: URL und Markdown Export
+- **Verwaltung**: Löschen und Organisieren der Badge-Historie
 
 ## Shopify Partner Dashboard Setup
 
@@ -149,14 +194,6 @@ Im Partner Dashboard unter "App pricing":
    fly deploy
    ```
 
-### Andere Hosting-Anbieter
-
-Die App kann auf jedem Node.js-kompatiblen Hosting-Service deployed werden:
-- Vercel
-- Railway
-- Heroku
-- DigitalOcean App Platform
-
 ## API Endpoints
 
 ### Authentifizierung
@@ -164,34 +201,32 @@ Die App kann auf jedem Node.js-kompatiblen Hosting-Service deployed werden:
 - `GET /auth/callback` - OAuth Callback
 
 ### App Routes
-- `GET /app` - Dashboard
+- `GET /app` - Dashboard mit Badgify Integration
 - `GET /app/billing` - Billing-Verwaltung
+- `GET /app/badgify` - Badgify Badge Generator
 - `POST /app/billing` - Subscription-Aktionen
 
 ### Webhooks
 - `POST /webhooks/app/uninstalled` - App-Deinstallation
+- `POST /webhooks/customers/data_request` - GDPR Datenabfrage
+- `POST /webhooks/customers/redact` - GDPR Datenlöschung
+- `POST /webhooks/shop/redact` - Shop-Datenlöschung
 
-## Datenbank Schema
+## 🎨 Badgify Usage Examples
 
-### Session Table
-Speichert Shopify-Session-Daten für Authentifizierung.
+### Einfacher Badge
+```markdown
+![Status](https://img.shields.io/badge/status-active-green)
+```
 
-### Subscription Table
-```sql
-- id: String (Primary Key)
-- shop: String (Unique)
-- subscriptionId: String (Shopify Subscription ID)
-- status: String (pending, active, cancelled, expired)
-- planName: String
-- price: Float
-- currency: String
-- billingCycle: String
-- trialDays: Integer
-- trialEndsAt: DateTime
-- currentPeriodStart: DateTime
-- currentPeriodEnd: DateTime
-- createdAt: DateTime
-- updatedAt: DateTime
+### Badge mit Logo
+```markdown
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+```
+
+### Custom Badge
+```markdown
+![Custom](https://img.shields.io/badge/My%20Project-v1.0.0-blue?style=flat-square&logo=github)
 ```
 
 ## Entwicklung
@@ -213,6 +248,11 @@ npm run db:migrate   # Datenbank-Migration
 
 ### Code-Struktur
 
+**Badgify Components (`app/components/badgify/`)**
+- `BadgeGenerator.tsx` - Hauptkomponente für Badge-Erstellung
+- `BadgePresets.tsx` - Vorgefertigte Badge-Templates
+- `BadgeHistory.tsx` - Badge-Verlauf und Wiederverwendung
+
 **Billing Service (`app/utils/billing.server.ts`)**
 - Zentrale Billing-Logik
 - Subscription-Verwaltung
@@ -220,8 +260,15 @@ npm run db:migrate   # Datenbank-Migration
 
 **Subscription Guard (`app/utils/subscription-guard.server.ts`)**
 - Middleware für Subscription-Überprüfung
-- Route-Protection
+- Route-Protection für Premium-Features
 - Status-Checks
+
+## 🔒 Subscription-basierte Features
+
+Badgify ist als Premium-Feature implementiert:
+- **Trial-Zugang**: Verfügbar während der 3-tägigen Testphase
+- **Subscription Required**: Vollzugriff nur mit aktiver Subscription
+- **Graceful Degradation**: Benutzerfreundliche Weiterleitung zur Billing-Seite
 
 ## Troubleshooting
 
@@ -235,9 +282,13 @@ npm run db:migrate   # Datenbank-Migration
    - Überprüfe, ob der Billing-Plan im Partner Dashboard konfiguriert ist
    - Stelle sicher, dass `isTest: true` für Entwicklung gesetzt ist
 
-3. **Webhook-Probleme**
-   - Überprüfe die Webhook-URLs im Partner Dashboard
-   - Stelle sicher, dass die App öffentlich erreichbar ist
+3. **Badge Generation Fehler**
+   - Überprüfe die Internetverbindung (shields.io Zugriff erforderlich)
+   - Validiere Badge-Parameter (Text, Farben, etc.)
+
+4. **Subscription Guard Fehler**
+   - Überprüfe Subscription-Status in der Datenbank
+   - Teste Trial-Periode-Logik
 
 ### Logs
 
@@ -249,11 +300,25 @@ npm run dev
 fly logs
 ```
 
-## Lizenz
+## 🤝 Contributing
 
-MIT License
+1. Fork das Repository
+2. Erstelle einen Feature Branch (`git checkout -b feature/amazing-feature`)
+3. Committe deine Änderungen (`git commit -m 'Add amazing feature'`)
+4. Push zum Branch (`git push origin feature/amazing-feature`)
+5. Öffne einen Pull Request
 
-## Support
+## 📄 Lizenz
 
-Bei Fragen oder Problemen erstelle ein Issue im Repository oder kontaktiere den Entwickler.
+MIT License - siehe [LICENSE](LICENSE) Datei für Details.
 
+## 🆘 Support
+
+Bei Fragen oder Problemen:
+- Erstelle ein Issue im Repository
+- Kontaktiere den Entwickler
+- Überprüfe die Dokumentation
+
+---
+
+**Powered by Shopify App Bridge, Remix, and shields.io** 🚀

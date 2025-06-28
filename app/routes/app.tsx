@@ -24,6 +24,7 @@ export default function App() {
       <ui-nav-menu>
         <a href="/app" rel="home">Home</a>
         <a href="/app/billing">Billing</a>
+        <a href="/app/badgify">Badgify</a>
       </ui-nav-menu>
       <Outlet />
     </AppProvider>
@@ -39,4 +40,3 @@ export const headers = () => ({
   "X-Shopify-API-Request-Failure-Reauthorize": "1",
   "X-Shopify-API-Request-Failure-Reauthorize-Url": "/api/auth",
 });
-

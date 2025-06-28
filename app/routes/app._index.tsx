@@ -87,8 +87,8 @@ export default function Index() {
               image="https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png"
             >
               <p>
-                Subscribe to unlock all features of the app. Start with a 3-day free trial, 
-                then just $9.99/month. Cancel anytime.
+                Subscribe to unlock all features including Badgify badge generator. 
+                Start with a 3-day free trial, then just $9.99/month. Cancel anytime.
               </p>
             </EmptyState>
           </Layout.Section>
@@ -130,7 +130,7 @@ export default function Index() {
                 }}
               >
                 <p>
-                  Your subscription is active. You have full access to all app features.
+                  Your subscription is active. You have full access to all app features including Badgify.
                 </p>
               </Banner>
             </div>
@@ -160,7 +160,7 @@ export default function Index() {
                   Welcome to {shop || "your shop"}
                 </Text>
                 <Text variant="bodyMd" tone="subdued">
-                  Your billing app dashboard
+                  Your billing app dashboard with integrated Badgify
                 </Text>
               </div>
                 
@@ -211,9 +211,16 @@ export default function Index() {
               )}
 
               <div style={{ marginTop: "2rem" }}>
-                <Button variant="primary" url="/app/billing" size="large">
-                  Manage Billing & Subscription
-                </Button>
+                <InlineStack gap="300">
+                  <Button variant="primary" url="/app/billing" size="large">
+                    Manage Billing & Subscription
+                  </Button>
+                  {(isActive || isInTrial) && (
+                    <Button url="/app/badgify" size="large">
+                      Open Badgify
+                    </Button>
+                  )}
+                </InlineStack>
               </div>
             </BlockStack>
           </Card>
@@ -228,6 +235,7 @@ export default function Index() {
               <div>
                 <BlockStack gap="200">
                   <Text variant="bodyMd">✓ Full app access</Text>
+                  <Text variant="bodyMd">✓ Badgify badge generator</Text>
                   <Text variant="bodyMd">✓ 3-day free trial</Text>
                   <Text variant="bodyMd">✓ Monthly billing ($9.99)</Text>
                   <Text variant="bodyMd">✓ Cancel anytime</Text>
@@ -242,6 +250,32 @@ export default function Index() {
               </div>
             </BlockStack>
           </Card>
+
+          {(isActive || isInTrial) && (
+            <Card>
+              <BlockStack gap="300">
+                <Text variant="headingMd" as="h2">
+                  🎯 Badgify Features
+                </Text>
+                <div>
+                  <BlockStack gap="200">
+                    <Text variant="bodyMd">✓ Custom badge generator</Text>
+                    <Text variant="bodyMd">✓ Multiple styles & colors</Text>
+                    <Text variant="bodyMd">✓ Logo integration</Text>
+                    <Text variant="bodyMd">✓ Ready-to-use presets</Text>
+                    <Text variant="bodyMd">✓ Badge history & reuse</Text>
+                    <Text variant="bodyMd">✓ Markdown export</Text>
+                  </BlockStack>
+                </div>
+                
+                <div style={{ marginTop: "1rem" }}>
+                  <Button url="/app/badgify" fullWidth variant="primary">
+                    Launch Badgify
+                  </Button>
+                </div>
+              </BlockStack>
+            </Card>
+          )}
         </Layout.Section>
       </Layout>
     </Page>
@@ -274,4 +308,3 @@ export function ErrorBoundary() {
     </Page>
   );
 }
-
