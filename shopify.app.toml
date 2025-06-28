@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 name = "Billing App"
-client_id = ""
+client_id = "f08ad740c5b93c05f8f188699eb5723c"
 application_url = "https://shopify-billing-1751058813.fly.dev"
 embedded = true
 
@@ -42,4 +42,3 @@ embedded = false
 automatically_update_urls_on_dev = true
 dev_store_url = ""
 include_config_on_deploy = true
-
