@@ -5,30 +5,32 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Install system dependencies for Prisma compatibility
-# Updated for newer Alpine versions - removed openssl1.1-compat
 RUN apk add --no-cache openssl curl libc6-compat
 
-# Set Prisma binary target for Alpine Linux compatibility
-ENV PRISMA_CLI_BINARY_TARGETS="linux-musl"
+# Set Prisma binary targets for Alpine Linux compatibility
+ENV PRISMA_CLI_BINARY_TARGETS="linux-musl,linux-musl-openssl-3.0.x"
+ENV PRISMA_CLIENT_ENGINE_TYPE="binary"
 
 # Copy package files first for better caching
 COPY package*.json ./
 
 # Install ALL dependencies (including devDependencies for build)
-# This ensures platform-specific binaries are installed correctly
 RUN npm ci && npm cache clean --force
 
 # Copy source code
 COPY . .
 
-# Generate Prisma client
+# Generate Prisma client with correct binary targets
 RUN npx prisma generate
 
-# Build the application (now with all dependencies available)
+# Build the application
 RUN npm run build
 
 # Remove devDependencies after build to reduce image size
 RUN npm prune --production
+
+# Regenerate Prisma client for production (ensures correct binaries)
+RUN npx prisma generate
 
 # Expose port
 EXPOSE 8080
