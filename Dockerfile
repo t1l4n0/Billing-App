@@ -8,7 +8,7 @@ WORKDIR /app
 RUN apk add --no-cache openssl curl libc6-compat
 
 # Set Prisma binary targets for Alpine Linux compatibility
-ENV PRISMA_CLI_BINARY_TARGETS="linux-musl,linux-musl-openssl-3.0.x"
+ENV PRISMA_CLI_BINARY_TARGETS="native,linux-musl,linux-musl-openssl-3.0.x"
 ENV PRISMA_CLIENT_ENGINE_TYPE="binary"
 
 # Copy package files first for better caching
@@ -38,5 +38,5 @@ EXPOSE 8080
 # Set environment variable for port
 ENV PORT=8080
 
-# Start the application
-CMD ["sh", "-c", "npx prisma db push && npm start"]
+# Start the application with proper database initialization
+CMD ["sh", "-c", "npx prisma db push --force-reset && npx prisma generate && npm start"]
