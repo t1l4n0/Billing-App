@@ -39,4 +39,4 @@ EXPOSE 8080
 ENV PORT=8080
 
 # Start the application with proper database initialization
-CMD ["sh", "-c", "npx prisma db push --force-reset && npx prisma generate && npm start"]
+CMD ["sh", "-c", "npx prisma db push && npm start"]
