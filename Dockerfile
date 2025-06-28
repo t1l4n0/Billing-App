@@ -4,8 +4,8 @@ FROM node:18-alpine
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies
-RUN apk add --no-cache openssl
+# Install system dependencies including curl
+RUN apk add --no-cache openssl curl
 
 # Copy package files first for better caching
 COPY package*.json ./
@@ -34,4 +34,3 @@ ENV PORT=8080
 
 # Start the application
 CMD ["sh", "-c", "npx prisma db push && npm start"]
-
