@@ -1,7 +1,8 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { authenticate } from "../shopify.server";
 import { json } from "@remix-run/node";
-import { PrismaClient } from "@prisma/client";
+import pkg from "@prisma/client";
+const { PrismaClient } = pkg;
 
 const prisma = new PrismaClient();
 
@@ -91,4 +92,3 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     await prisma.$disconnect();
   }
 };
-

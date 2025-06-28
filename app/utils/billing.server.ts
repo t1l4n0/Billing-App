@@ -1,4 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import pkg from "@prisma/client";
+const { PrismaClient } = pkg;
 import type { Session } from "@shopify/shopify-api";
 
 const prisma = new PrismaClient();
@@ -155,4 +156,3 @@ export class BillingService {
     });
   }
 }
-
