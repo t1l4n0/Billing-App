@@ -4,8 +4,8 @@ FROM node:18-alpine
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies including curl, libssl3, openssl1.1-compat, and libc6-compat for Prisma compatibility
-RUN apk add --no-cache openssl curl libssl3 openssl1.1-compat libc6-compat
+# Install system dependencies including curl, libssl3, and libc6-compat for Prisma compatibility
+RUN apk add --no-cache openssl curl libssl3 libc6-compat
 
 # Create symbolic links for OpenSSL libraries to ensure Prisma compatibility
 RUN ln -sf /usr/lib/libssl.so.3 /usr/lib/libssl.so.1.1 && \
